@@ -18,9 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
-//app.get('/', function(req, res) {
-//  res.sendFile(path.join(__dirname + '/index.html'));
-//});
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/gameTeaser', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/gameTeaser.html'));
+});
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
