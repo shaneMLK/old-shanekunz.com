@@ -3,11 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const messages = require('./db/messages');
 
 //var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(morgan('tiny'));
+app.use(cors());
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +31,13 @@ app.get('/', function(req, res) {
 app.get('/gameTeaser', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/gameTeaser.html'));
 });
+
+app.get('/messages', (req, res) => {
+  messages.getAll().then((messages) => {
+      res.json(messages);
+  });
+});
+
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
