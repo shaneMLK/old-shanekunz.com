@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const messages = require('./db/messages');
 
 var app = express();
-app.use(express.static('public'))
 app.use(cors());
 app.use(bodyParser.json());
 
