@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const messages = require('./db/messages');
 
 var app = express();
-
+app.use(express.static('public'))
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -15,10 +15,12 @@ app.use(logger('tiny'));
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/gameTeaser', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/gameTeaser.html'));
+app.get('/danardos', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/danardos.html'));
 });
-
+app.get('/contact', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/contact.html'));
+});
 app.get('/messages', (req, res) => {
   messages.getAll().then((messages) => {
       res.json(messages);
